@@ -20,7 +20,9 @@ namespace FolhaPonto.Controllers
 
         public ActionResult Index(int? page)
         {
-            var lst = Db.Listar().Select(x => new JustificativaListViewModel
+            var login = User.Identity.Name;
+            var func = new FuncionarioCo().Find(x => x.Login.Equals(login));
+            var lst = Db.Listar(x=>x.Funcionario.Id == func.Id).Select(x => new JustificativaListViewModel
             {
                 Id = x.Id,
                 FuncionarioNome = x.Funcionario.Nome,
