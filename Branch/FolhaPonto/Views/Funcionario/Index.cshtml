@@ -1,0 +1,77 @@
+﻿@using FolhaPonto.Extensions
+@using PagedList.Mvc
+@model PagedList.IPagedList<FolhaPonto.Models.FuncionarioListViewModel>
+
+@{
+    ViewBag.Title = "Lista de Funcionários";
+}
+@Html.Partial("View")
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Funcionário", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>
+            Cargo
+        </th>
+        <th>
+            Unidade
+        </th>
+        <th>
+            Perfil
+        </th>
+        <th>
+            Nome
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Perfil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionIconLink("Edit", "Funcionario", new { id = @item.Id }, new { @class = "glyphicon glyphicon-edit" }, new Dictionary<string, object> { { "class", "btn btn-default btn-sm" }, { "data-toggle", "tooltip" }, { "data-placement", "top" }, { "title", "Alterar" } })
+                    @Html.ActionIconLink("Delete", "Funcionario", new { id = @item.Id }, new { @class = "glyphicon glyphicon-trash" }, new Dictionary<string, object> { { "class", "modal-link btn btn-danger btn-sm" }, { "data-toggle", "tooltip" }, { "data-placement", "top" }, { "title", "Excluir" } })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6">
+                Nenhum registro foi encontrado.
+            </td>
+        </tr>
+    }
+</table>
+<div class="row">
+    <div class="col-sm-12">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
+</div>

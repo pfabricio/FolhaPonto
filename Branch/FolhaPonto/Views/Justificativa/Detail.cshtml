@@ -1,0 +1,58 @@
+﻿@model FolhaPonto.Models.JustificativaListViewModel
+
+@{
+    ViewBag.Title = "Detalhe da Justificativa";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Dados Justificativa</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FuncionarioNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FuncionarioNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fim)
+        </dd>
+    </dl>
+</div>
+<div>
+    
+</div>
+<div class="form-group clearfix">
+    <div class="col-md-8">
+        <label>Justificativa</label>
+        @Html.TextAreaFor(x => x.Texto, 5, 0, new {@class = "form-control SemMaxWidth", Disabled = ""})
+        @Html.ValidationMessageFor(model => model.Texto, "", new {@class = "text-danger"})
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Voltar", "Index")
+</p>

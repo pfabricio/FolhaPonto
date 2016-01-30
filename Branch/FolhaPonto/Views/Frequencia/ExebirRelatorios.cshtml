@@ -1,0 +1,69 @@
+﻿@using FolhaPonto.Models
+@model IEnumerable<FolhaPonto.Models.FrequenciaListViewModel>
+
+@{
+    ViewBag.Title = "Relatório de Metas";
+    var funcionario = (FrequenciaListViewModel)ViewBag.Total;
+    var tempoMeta = (int)ViewBag.TempoMeta;
+}
+
+<h2>@ViewBag.Title</h2>
+<br/>
+<p class="text-primary" style="font-style: italic; font-weight: bold">
+    @funcionario.FuncionarioNome alcançou @funcionario.HoraTrabalhada  de @tempoMeta h/mês
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FuncionarioNome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntradaIntervalo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaidaIntervalo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Saida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraTrabalhada)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuncionarioNome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntradaIntervalo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaidaIntervalo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Saida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraTrabalhada)
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
+</div>

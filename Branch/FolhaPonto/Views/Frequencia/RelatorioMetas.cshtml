@@ -1,0 +1,86 @@
+﻿@model FolhaPonto.Models.RelatorioMetasViewModel
+@{
+    ViewBag.Title = "Relatório Metas";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("ExebirRelatorios","Frequencia"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(x=>x.Funcionario, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextBoxFor(x=>x.Funcionario, new { @class = "form-control SemMaxWidth autocomplete", dataurl = @Url.Action("GetFuncionarios", "Justificativa") })
+                @Html.HiddenFor(x=>x.Funcionarioid)
+                @Html.ValidationMessageFor(x=>x.Funcionario,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x=>x.Data1, new {@class = "control-label col-md-2"})
+            <div class="col-md-2">
+                @Html.TextBoxFor(x=>x.Data1, new {@class = "form-control SemMaxWidth data mdata datepicker"})
+                @Html.ValidationMessageFor(x=>x.Data1,"", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x=>x.Data2, new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.TextBoxFor(x=>x.Data2, new { @class = "form-control SemMaxWidth data mdata datepicker" })
+                @Html.ValidationMessageFor(x=>x.Data2,"", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Abrir Relatório" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $(".mdata").mask("99/99/9999");
+
+            $(".data").datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                autoclose: true
+            });
+
+            $(".autocomplete").autocomplete({
+                minLength: 2,
+                source: function (request, response) {
+                    var url = $("#Funcionario").attr("dataurl");
+                    $.getJSON(url, { term: request.term }, function (data) {
+                        response(data);
+                    });
+                },
+                select: function (event, ui) {
+                    $("input[id=Funcionarioid]").val(ui.item.id);
+                },
+                change: function (event, ui) {
+                    if (!ui.item) {
+                        $("input[id=Funcionarioid]").val("");
+                    }
+                }
+            });
+        })
+    </script>
+
+}

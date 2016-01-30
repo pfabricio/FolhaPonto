@@ -1,0 +1,77 @@
+﻿@model FolhaPonto.Models.JustificativaViewModel
+
+@{
+    ViewBag.Title = "Cadastrar Justificativa";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Dados da Justificativa</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FuncionarioNome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FuncionarioNome, new { htmlAttributes = new { @class = "form-control autocomplete SemMaxWidth", dataurl = @Url.Action("GetFuncionarios") } })
+                @Html.ValidationMessageFor(model => model.FuncionarioNome, "", new { @class = "text-danger" })
+                @Html.HiddenFor(x=>x.FuncionarioId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control data mdata SemMaxWidth" } })
+                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control tempo SemMaxWidth" } })
+                @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fim, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-1">
+                @Html.EditorFor(model => model.Fim, new {htmlAttributes = new {@class = "form-control tempo SemMaxWidth" } })
+                @Html.ValidationMessageFor(model => model.Fim, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Texto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.TextAreaFor(x => x.Texto, 5, 0, new { @class = "form-control SemMaxWidth" })               
+                @Html.ValidationMessageFor(model => model.Texto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+@section scripts{
+    <link href="~/Content/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.min.js"></script>
+    <script src="~/Scripts/autocomplete.justificava.js"></script>
+}

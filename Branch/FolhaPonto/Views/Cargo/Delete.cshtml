@@ -1,0 +1,39 @@
+﻿@model FolhaPonto.Models.CargoViewModel
+
+@{
+    ViewBag.Title = "Excluir Cargo";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Deseja realmente excluir este cargo?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCargo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

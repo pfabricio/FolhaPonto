@@ -1,0 +1,50 @@
+﻿@using FolhaPonto.Extensions
+@using FolhaPonto.Models
+@{
+    ViewBag.Title = "Home Page";
+    var lstMenus = ViewBag.Menu as List<MenuViewModel>;
+}
+@Html.Partial("View")
+<br />
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("Index", "Login", null, @Url.Content("~/Content/imagem/menu/entrar.png"), null, new { @class = "img-responsive" })
+        </div>
+    </div>
+}
+else
+{
+    var @login = User.Identity.Name;
+    <div class="row">
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("Logout", "Login", null, @Url.Content("~/Content/imagem/menu/sair.png"), null, new { @class = "img-responsive" })
+        </div>
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("Entrada", "Frequencia", new { login = @login }, @Url.Content("~/Content/imagem/menu/darEntrada.png"), null, new { @class = "img-responsive" })
+        </div>
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("Intervalo", "Frequencia", new { login = @login }, @Url.Content("~/Content/imagem/menu/darIntervalo.png"), null, new { @class = "img-responsive" })
+        </div>
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("VoltarIntervalo", "Frequencia", new { login = @login }, @Url.Content("~/Content/imagem/menu/sairIntervalo.png"), null, new { @class = "img-responsive" })
+        </div>
+        <div class="col-md-2 col-xs-6">
+            @Html.ImageButton("Saida", "Frequencia", new { login = @login }, @Url.Content("~/Content/imagem/menu/darSaida.png"), null, new { @class = "img-responsive" })
+        </div>
+    </div>
+    if (lstMenus != null && lstMenus.Any())
+    {
+        <div class="TituloMenu">Atividades específicas</div>
+        <hr class="hr" />
+        <div class="row">
+            @foreach (var menu in lstMenus)
+            {
+                <div class="col-md-2 col-xs-6">
+                    @Html.ImageButton(menu.Action, menu.Controller, null, @Url.Content(menu.Imagem), null, new { @class = "img-responsive" })
+                </div>
+            }
+        </div>
+    }
+}

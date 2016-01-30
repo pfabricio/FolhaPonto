@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{155F3B09-C835-4AA3-831F-ABE92C9BB8EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FolhaPonto.Negocio</RootNamespace>
+    <AssemblyName>FolhaPonto.Negocio</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\CargoCo.cs" />
+    <Compile Include="Controller\FrequenciaCo.cs" />
+    <Compile Include="Controller\FuncionarioCo.cs" />
+    <Compile Include="Controller\Interface\Controler.cs" />
+    <Compile Include="Controller\Interface\IControllerBase.cs" />
+    <Compile Include="Controller\JornadaCo.cs" />
+    <Compile Include="Controller\JustificavaCo.cs" />
+    <Compile Include="Controller\MenuCo.cs" />
+    <Compile Include="Controller\PerfilCo.cs" />
+    <Compile Include="Controller\UnidadeCo.cs" />
+    <Compile Include="FolhaContext.cs" />
+    <Compile Include="Migrations\201601300310574_InicializacaoDb.cs" />
+    <Compile Include="Migrations\201601300310574_InicializacaoDb.Designer.cs">
+      <DependentUpon>201601300310574_InicializacaoDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601300323055_MudancaTabelaFrequencia.cs" />
+    <Compile Include="Migrations\201601300323055_MudancaTabelaFrequencia.Designer.cs">
+      <DependentUpon>201601300323055_MudancaTabelaFrequencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\CargoMo.cs" />
+    <Compile Include="Model\FrequenciaMo.cs" />
+    <Compile Include="Model\FuncionarioMo.cs" />
+    <Compile Include="Model\JornadaMo.cs" />
+    <Compile Include="Model\JustificativaMo.cs" />
+    <Compile Include="Model\Maps\CargoMap.cs" />
+    <Compile Include="Model\Maps\FrequenciaMap.cs" />
+    <Compile Include="Model\Maps\FuncionarioMap.cs" />
+    <Compile Include="Model\Maps\JornadaMap.cs" />
+    <Compile Include="Model\Maps\JustificativaMap.cs" />
+    <Compile Include="Model\Maps\MenuMap.cs" />
+    <Compile Include="Model\Maps\PerfilMap.cs" />
+    <Compile Include="Model\Maps\UnidadeMap.cs" />
+    <Compile Include="Model\MenuMo.cs" />
+    <Compile Include="Model\PerfilMo.cs" />
+    <Compile Include="Model\UnidadeMo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601300310574_InicializacaoDb.resx">
+      <DependentUpon>201601300310574_InicializacaoDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601300323055_MudancaTabelaFrequencia.resx">
+      <DependentUpon>201601300323055_MudancaTabelaFrequencia.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

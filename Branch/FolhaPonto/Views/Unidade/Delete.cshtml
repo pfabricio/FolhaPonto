@@ -1,0 +1,38 @@
+﻿@model FolhaPonto.Models.UnidadeViewModel
+
+@{
+    ViewBag.Title = "Excluir Unidade";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Deseja realmente excluir esta unidade?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Código
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>        
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeUnidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeUnidade)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Voltara", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,33 @@
+﻿@model FolhaPonto.Models.LoginViewModel
+@{
+    ViewBag.Title = "Autenticação - Folha de Ponto";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+@Html.Partial("View")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="Login col-md-2 col-xs-12">
+            <div class="col-md-12 TituloLogin">Autenticação</div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-12 col-xs-12">
+                    @Html.TextBoxFor(model => model.Login, new { @class = "form-control SemMaxWidth", placeholder = "Digite o Login" })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-nd-12 col-xs-12">
+                    @Html.PasswordFor(model => model.Senha, new { @class = "form-control SemMaxWidth", placeholder = "Digite a Senha" })
+                    @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 col-xs-12">
+                    <input type="submit" class="form-control btn btn-primary btn-block SemMaxWidth" value="Login" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

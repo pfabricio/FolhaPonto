@@ -1,0 +1,10 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @{var @txtLink = "Olá " + User.Identity.Name + "!";}
+            @Html.ActionLink(@txtLink, "Conta", "Conta", new { nome = User.Identity.Name }, null)
+        </li>
+    </ul>
+}
+

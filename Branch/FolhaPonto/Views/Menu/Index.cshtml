@@ -1,0 +1,104 @@
+﻿@using FolhaPonto.Extensions
+@using PagedList.Mvc
+@model PagedList.IPagedList<FolhaPonto.Models.MenuViewModel>
+@{
+    ViewBag.Title = "Lista de Menus";
+}
+@Html.Partial("View")
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Menu", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Menu", FormMethod.Get, new { id = "frmPesquisa", @class = "form-inline" }))
+{
+    <div class="col-md-1 Label text-right">
+        <label>Perfil</label>
+    </div>
+    <div class="form-group col-md-4" style="margin-bottom: 15px;">        
+        <select name="Peso" id="Peso" class="form-control">
+            <option value="" selected>Todos</option>
+            @{
+                foreach (var item in (List<SelectListItem>)ViewBag.Peso)
+                {
+                    if (item.Value.Equals(Convert.ToString(ViewBag.ItemSelecionado)))
+                    {
+                        <option value="@item.Value" selected>@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>#</th>
+        <th>
+            Action
+        </th>
+        <th>
+            Controller
+        </th>
+        <th>
+            Peso
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Action)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Controller)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                <td>
+                    @Html.ActionIconLink("Delete", "Menu", new { id = @item.Id }, new { @class = "glyphicon glyphicon-trash" }, new Dictionary<string, object> { { "class", "modal-link btn btn-danger btn-sm" }, { "data-toggle", "tooltip" }, { "data-placement", "top" }, { "title", "Excluir" } })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5">
+                Nenhum registro foi encontrado.
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row">
+    <div class="col-sm-12">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, peso = Convert.ToString(ViewBag.ItemSelecionado) }))
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#Peso').change(function () {
+                $('#frmPesquisa').submit();
+            });
+        });
+    </script>
+}

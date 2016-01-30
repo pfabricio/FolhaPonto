@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+    var info = (string)TempData["msg"];
+    var op = (string)TempData["op"];
+}
+@if (!string.IsNullOrEmpty(op))
+{
+    switch (@op)
+    {
+        case "1":
+            {
+                <div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 10px">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @info
+                </div>
+                break;
+            }
+        case "2":
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 10px">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @info
+                </div>
+                break;
+            }
+    }
+    <script type="text/javascript">
+        setTimeout(function () { $(".alert").alert('close'); }, 6000);
+    </script>
+}

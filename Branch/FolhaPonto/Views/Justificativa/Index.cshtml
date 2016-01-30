@@ -1,0 +1,79 @@
+﻿@using FolhaPonto.Extensions
+@using PagedList.Mvc
+@model PagedList.IPagedList<FolhaPonto.Models.JustificativaListViewModel>
+
+
+@{
+    ViewBag.Title = "Lista de Justificativas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Justificativa", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Funcionário
+        </th>
+        <th>
+            Data
+        </th>
+        <th>
+            Inicio
+        </th>
+        <th>
+            Fim
+        </th>
+        <th>
+            Texto
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+                <td>
+                    @Html.ActionIconLink("Detail", "Justificativa", new { id = @item.Id }, new { @class = "glyphicon glyphicon-list-alt" }, new Dictionary<string, object> { { "class", "btn btn-default btn-sm" }, { "data-toggle", "tooltip" }, { "data-placement", "top" }, { "title", "Detalhe" } })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6">
+                Nenhuma justificativa foi encontrada.
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="row">
+    <div class="col-sm-12">
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
+</div>

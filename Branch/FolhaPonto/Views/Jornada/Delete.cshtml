@@ -1,0 +1,71 @@
+﻿@model FolhaPonto.Models.JornadaListViewModel
+
+@{
+    ViewBag.Title = "Excluir Jornada";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Deseja realmente excluir esta Jornada?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Código
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cargo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cargo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraEntrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraSaida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraSaida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempoIntervalo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempoIntervalo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempoMeta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempoMeta)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>
