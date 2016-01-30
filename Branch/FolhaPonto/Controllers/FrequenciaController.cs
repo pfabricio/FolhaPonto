@@ -21,8 +21,10 @@ namespace FolhaPonto.Controllers
 
         public ActionResult Index(int? page)
         {
-
-            var lst = Db.Listar().Select(x => new FrequenciaListViewModel
+            var login = User.Identity.Name;
+            var funcCo = new FuncionarioCo();
+            var func = funcCo.Find(x => x.Login.Equals(login));            
+            var lst = Db.Listar(x=>x.Funcionario.Id == func.Id).Select(x => new FrequenciaListViewModel
             {
                 Id = x.Id,
                 FuncionarioNome = x.Funcionario.Nome,
