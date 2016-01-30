@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Specialized;
+using System.Linq;
 using System.Web.Mvc;
 using FolhaPonto.Extensions;
 using FolhaPonto.Models;
@@ -79,7 +80,7 @@ namespace FolhaPonto.Controllers
 
         public ActionResult Delete(int id)
         {
-            var funcionario = _db.Listar().Select(x => new FuncionarioListViewModel
+            var funcionario = _db.Listar(x=> x.Id == id).Select(x => new FuncionarioListViewModel
             {
                 Id = x.Id,
                 Cargo = x.Cargo.NomeCargo,
